@@ -26,7 +26,7 @@ export default function CollectionCard({
   const content = (
     <>
       <div
-        className={`aspect-[4/3] mb-5 relative overflow-hidden ${dark ? 'img-placeholder-dark' : 'img-placeholder'}`}
+        className={`aspect-[4/5] mb-5 relative overflow-hidden ${dark ? 'img-placeholder-dark' : 'img-placeholder'}`}
       >
         <Badge status={status} label={badgeLabel} className="absolute top-4 left-4" />
         <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300" />

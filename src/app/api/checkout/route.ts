@@ -48,6 +48,12 @@ export async function POST(request: Request) {
         },
         quantity: item.quantity,
       })),
+      // Stashed so the webhook can record exactly what was bought.
+      metadata: {
+        items: JSON.stringify(
+          items.map(item => ({ slug: item.slug, name: item.name, price: item.price, quantity: item.quantity }))
+        ),
+      },
       shipping_options: [
         {
           shipping_rate_data: {

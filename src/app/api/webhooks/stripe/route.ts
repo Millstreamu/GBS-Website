@@ -1,9 +1,8 @@
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
+import { writeClient } from '@/sanity/lib/writeClient'
 
-// Records completed orders. Until Sanity is connected, completed checkouts
-// are just logged clearly to the server console — connect Sanity to persist
-// them as real order records.
+// Records completed orders as "order" documents in Sanity.
 
 export async function POST(request: Request) {
   const secretKey = process.env.STRIPE_SECRET_KEY
@@ -38,13 +37,31 @@ export async function POST(request: Request) {
 
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session
-    console.log('✅ Order completed:', {
-      sessionId: session.id,
-      amountTotal: session.amount_total,
-      customerEmail: session.customer_details?.email,
-    })
-    // TODO: once Sanity is connected, write an order record here instead of
-    // just logging it.
+
+    let items: { name: string; slug: string; price: number; quantity: number }[] = []
+    try {
+      items = session.metadata?.items ? JSON.parse(session.metadata.items) : []
+    } catch {
+      console.error('Could not parse order items from session metadata.')
+    }
+
+    try {
+      await writeClient.create({
+        _type: 'order',
+        stripeSessionId: session.id,
+        customerEmail: session.customer_details?.email ?? undefined,
+        amountTotal: session.amount_total ?? undefined,
+        currency: session.currency ?? undefined,
+        items,
+        status: 'paid',
+        createdAt: new Date().toISOString(),
+      })
+      console.log('✅ Order recorded in Sanity:', session.id)
+    } catch (err) {
+      // Don't fail the webhook over a Sanity write error — log it loudly so
+      // it can be investigated, but still acknowledge receipt to Stripe.
+      console.error('Failed to write order to Sanity:', err)
+    }
   }
 
   return NextResponse.json({ received: true })
