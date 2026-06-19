@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #F5F2ED;
+  --surface: #EEEAE3;
+  --dark: #1C1C1A;
+  --fg: #1C1C1A;
+  --muted: #6B6560;
+  --muted-2: #9A9590;
+  --accent: #2D3B2A;
+  --accent-text: #F5F2ED;
+  --border: #E0DDD7;
+  --footer-bg: #1C1C1A;
+  --footer-fg: #C7C2B8;
+
+  /* legacy aliases kept for older components */
+  --card-bg: #EEEAE3;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html, body {
+  background-color: var(--bg);
+  color: var(--fg);
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Warm linen-toned placeholder standing in for real product photography */
+.img-placeholder {
+  background: linear-gradient(160deg, #E3DFD6 0%, #EEEAE3 50%, #DAD5CB 100%);
+}
+
+/* Darker placeholder for use on dark sections */
+.img-placeholder-dark {
+  background: linear-gradient(160deg, #2A2A27 0%, #242422 60%, #1C1C1A 100%);
+}
