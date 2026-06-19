@@ -4,26 +4,20 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import ProductCard from '@/components/ProductCard'
 import ProductDetail from './ProductDetail'
-import { collections } from '@/tokens'
+import { getCollectionBySlug, getAllProductParams } from '@/lib/sanityData'
 
-export function generateStaticParams() {
-  return collections.flatMap(col =>
-    col.categories.flatMap(cat =>
-      cat.products.map(p => ({
-        slug: col.slug,
-        category: cat.slug,
-        product: p.slug,
-      }))
-    )
-  )
+export const revalidate = 60
+
+export async function generateStaticParams() {
+  return getAllProductParams()
 }
 
-export default function ProductPage({
+export default async function ProductPage({
   params,
 }: {
   params: { slug: string; category: string; product: string }
 }) {
-  const col = collections.find(c => c.slug === params.slug)
+  const col = await getCollectionBySlug(params.slug)
   if (!col) notFound()
   const cat = col.categories.find(c => c.slug === params.category)
   if (!cat) notFound()

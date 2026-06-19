@@ -1,9 +1,16 @@
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import CollectionCard from '@/components/CollectionCard'
-import { archivedCollections, collections } from '@/tokens'
+import { getActiveCollections, getArchivedCollections } from '@/lib/sanityData'
 
-export default function ArchivePage() {
+export const revalidate = 60
+
+export default async function ArchivePage() {
+  const [archivedCollections, collections] = await Promise.all([
+    getArchivedCollections(),
+    getActiveCollections(),
+  ])
+
   return (
     <div style={{ backgroundColor: 'var(--bg)' }}>
       <Nav />

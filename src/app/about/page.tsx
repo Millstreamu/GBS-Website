@@ -1,10 +1,14 @@
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import CollectionCard from '@/components/CollectionCard'
-import { collections, site } from '@/tokens'
+import { site } from '@/tokens'
+import { getActiveCollections } from '@/lib/sanityData'
 
-export default function AboutPage() {
+export const revalidate = 60
+
+export default async function AboutPage() {
   const { about } = site
+  const collections = await getActiveCollections()
 
   return (
     <div style={{ backgroundColor: 'var(--bg)' }}>

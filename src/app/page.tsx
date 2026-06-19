@@ -2,9 +2,13 @@ import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import CollectionCarousel from '@/components/CollectionCarousel'
-import { collections } from '@/tokens'
+import { getActiveCollections } from '@/lib/sanityData'
 
-export default function HomePage() {
+export const revalidate = 60
+
+export default async function HomePage() {
+  const collections = await getActiveCollections()
+
   return (
     <div style={{ backgroundColor: 'var(--bg)' }}>
       <Nav />

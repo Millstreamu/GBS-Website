@@ -5,17 +5,21 @@ import Footer from '@/components/Footer'
 import Badge from '@/components/Badge'
 import ProductCard from '@/components/ProductCard'
 import CollectionCard from '@/components/CollectionCard'
-import { collections } from '@/tokens'
+import { getActiveCollections, getCollectionBySlug, getAllCollectionSlugs } from '@/lib/sanityData'
 
-export function generateStaticParams() {
-  return collections.map(col => ({ slug: col.slug }))
+export const revalidate = 60
+
+export async function generateStaticParams() {
+  const slugs = await getAllCollectionSlugs()
+  return slugs.map(slug => ({ slug }))
 }
 
-export default function CollectionPage({ params }: { params: { slug: string } }) {
-  const col = collections.find(c => c.slug === params.slug)
+export default async function CollectionPage({ params }: { params: { slug: string } }) {
+  const col = await getCollectionBySlug(params.slug)
   if (!col) notFound()
 
-  const otherCollections = collections.filter(c => c.slug !== col.slug)
+  const allCollections = await getActiveCollections()
+  const otherCollections = allCollections.filter(c => c.slug !== col.slug)
   const itemCount = col.categories.reduce((acc, c) => acc + c.products.length, 0)
 
   return (

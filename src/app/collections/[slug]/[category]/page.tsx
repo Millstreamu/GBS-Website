@@ -3,20 +3,20 @@ import { notFound } from 'next/navigation'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import ProductCard from '@/components/ProductCard'
-import { collections } from '@/tokens'
+import { getCollectionBySlug, getAllCategoryParams } from '@/lib/sanityData'
 
-export function generateStaticParams() {
-  return collections.flatMap(col =>
-    col.categories.map(cat => ({ slug: col.slug, category: cat.slug }))
-  )
+export const revalidate = 60
+
+export async function generateStaticParams() {
+  return getAllCategoryParams()
 }
 
-export default function CategoryPage({
+export default async function CategoryPage({
   params,
 }: {
   params: { slug: string; category: string }
 }) {
-  const col = collections.find(c => c.slug === params.slug)
+  const col = await getCollectionBySlug(params.slug)
   if (!col) notFound()
   const cat = col.categories.find(c => c.slug === params.category)
   if (!cat) notFound()
