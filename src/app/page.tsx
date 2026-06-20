@@ -52,6 +52,7 @@ export default async function HomePage() {
               description: col.tagline,
               status: col.status,
               productTypes: col.productTypes,
+              imageUrl: col.heroImageUrl,
             }))}
             variant="dark"
           />

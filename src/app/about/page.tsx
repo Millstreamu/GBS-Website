@@ -84,6 +84,7 @@ export default async function AboutPage() {
                 status={col.status}
                 productTypes={col.productTypes}
                 variant="dark"
+                imageUrl={col.heroImageUrl}
               />
             ))}
           </div>

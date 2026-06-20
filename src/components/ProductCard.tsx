@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { formatPrice, type Product } from '@/tokens'
 
@@ -14,6 +15,15 @@ export default function ProductCard({ product, collectionSlug, categorySlug }: P
       className="group block"
     >
       <div className="aspect-[4/3] mb-4 overflow-hidden img-placeholder relative">
+        {product.imageUrls?.[0] && (
+          <Image
+            src={product.imageUrls[0]}
+            alt={product.name}
+            fill
+            sizes="(min-width: 1024px) 33vw, 100vw"
+            className="object-cover"
+          />
+        )}
         <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
       </div>
 

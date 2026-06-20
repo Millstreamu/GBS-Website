@@ -4,8 +4,10 @@
 // existing component (ProductCard, CollectionCard, Badge, CollectionCarousel)
 // unchanged — only the data source moves from tokens.ts to Sanity.
 
-import { sanityClient } from "./sanity";
+import { sanityClient, urlFor } from "./sanity";
 import type { Collection, Product, ProductCategory, CollectionStatus } from "@/tokens";
+
+type SanityImageRef = { asset?: { _ref?: string; _id?: string } } | null | undefined;
 
 type SanityProduct = {
   _id: string;
@@ -16,6 +18,7 @@ type SanityProduct = {
   shortDescription?: string;
   materials?: string;
   features?: string[];
+  images?: SanityImageRef[];
 };
 
 type SanityCategory = {
@@ -36,8 +39,21 @@ type SanityCollection = {
   materials?: string;
   productTypes?: string;
   heroAlt?: string;
+  heroImage?: SanityImageRef;
   categories: SanityCategory[];
 };
+
+// Sanity returns null for empty image fields, and not every image asset
+// reference is guaranteed valid — guard before calling urlFor() so a bad
+// or missing image never breaks the page.
+function safeImageUrl(image: SanityImageRef): string | undefined {
+  if (!image || !image.asset) return undefined;
+  try {
+    return urlFor(image).width(1200).fit("max").auto("format").url();
+  } catch {
+    return undefined;
+  }
+}
 
 function mapProduct(p: SanityProduct, tag: string): Product {
   return {
@@ -48,6 +64,9 @@ function mapProduct(p: SanityProduct, tag: string): Product {
     material: p.materials ?? "",
     tag,
     features: p.features,
+    imageUrls: (p.images ?? [])
+      .map(safeImageUrl)
+      .filter((url): url is string => !!url),
   };
 }
 
@@ -71,17 +90,18 @@ function mapCollection(c: SanityCollection): Collection {
     materials: c.materials ?? "",
     productTypes: c.productTypes ?? "",
     heroAlt: c.heroAlt ?? `${c.name} hero image`,
+    heroImageUrl: safeImageUrl(c.heroImage),
     categories: (c.categories ?? []).map(mapCategory),
   };
 }
 
 const COLLECTION_PROJECTION = `
   _id, name, "slug": slug.current, status, tagline, description, longDescription,
-  materials, productTypes, heroAlt,
+  materials, productTypes, heroAlt, heroImage,
   "categories": *[_type == "category" && collection._ref == ^._id] {
     _id, name, "slug": slug.current,
     "products": *[_type == "product" && category._ref == ^._id] {
-      _id, name, "slug": slug.current, sku, price, shortDescription, materials, features
+      _id, name, "slug": slug.current, sku, price, shortDescription, materials, features, images
     }
   }
 `;

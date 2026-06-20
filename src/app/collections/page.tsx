@@ -29,6 +29,7 @@ export default async function CollectionsPage() {
               status={col.status}
               productTypes={col.productTypes}
               variant="light"
+              imageUrl={col.heroImageUrl}
             />
           ))}
         </div>

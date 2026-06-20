@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import Nav from '@/components/Nav'
@@ -63,7 +64,22 @@ export default async function CollectionPage({ params }: { params: { slug: strin
             </div>
           </div>
 
-          <div className="aspect-[4/3] img-placeholder" role="img" aria-label={col.heroAlt} />
+          <div
+            className="aspect-[4/3] img-placeholder relative overflow-hidden"
+            role="img"
+            aria-label={col.heroAlt}
+          >
+            {col.heroImageUrl && (
+              <Image
+                src={col.heroImageUrl}
+                alt={col.heroAlt}
+                fill
+                sizes="50vw"
+                className="object-cover"
+                priority
+              />
+            )}
+          </div>
         </div>
 
         {/* Categories */}
@@ -109,6 +125,7 @@ export default async function CollectionPage({ params }: { params: { slug: strin
                 status={other.status}
                 productTypes={other.productTypes}
                 variant="dark"
+                imageUrl={other.heroImageUrl}
               />
             ))}
           </div>

@@ -36,6 +36,7 @@ export interface Product {
   material: string
   tag: string
   features?: string[]
+  imageUrls?: string[]
 }
 
 export interface ProductCategory {
@@ -55,6 +56,7 @@ export interface Collection {
   materials: string
   productTypes: string
   heroAlt: string
+  heroImageUrl?: string
   categories: ProductCategory[]
 }
 

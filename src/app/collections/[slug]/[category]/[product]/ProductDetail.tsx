@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { formatPrice, type Product } from '@/tokens'
 import { useCart } from '@/lib/cart-context'
 
@@ -35,11 +36,32 @@ export default function ProductDetail({ product, collectionName, collectionSlug,
     <div className="grid grid-cols-2 gap-16 pb-16">
       {/* Gallery */}
       <div>
-        <div className="aspect-[4/3] img-placeholder mb-4" />
+        <div className="aspect-[4/3] img-placeholder mb-4 relative overflow-hidden">
+          {product.imageUrls?.[0] && (
+            <Image
+              src={product.imageUrls[0]}
+              alt={product.name}
+              fill
+              sizes="50vw"
+              className="object-cover"
+              priority
+            />
+          )}
+        </div>
         <div className="grid grid-cols-3 gap-4">
-          <div className="aspect-square img-placeholder" />
-          <div className="aspect-square img-placeholder" />
-          <div className="aspect-square img-placeholder" />
+          {[1, 2, 3].map(i => (
+            <div key={i} className="aspect-square img-placeholder relative overflow-hidden">
+              {product.imageUrls?.[i] && (
+                <Image
+                  src={product.imageUrls[i]}
+                  alt={`${product.name} detail ${i}`}
+                  fill
+                  sizes="16vw"
+                  className="object-cover"
+                />
+              )}
+            </div>
+          ))}
         </div>
       </div>
 

@@ -11,6 +11,7 @@ type CarouselItem = {
   description: string
   status: CollectionStatus
   productTypes?: string
+  imageUrl?: string
 }
 
 type Props = {
@@ -34,6 +35,7 @@ export default function CollectionCarousel({ items, variant = 'dark' }: Props) {
             status={item.status}
             productTypes={item.productTypes}
             variant={variant}
+            imageUrl={item.imageUrl}
           />
         ))}
       </div>

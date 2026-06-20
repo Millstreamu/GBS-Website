@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import Badge from './Badge'
 import type { CollectionStatus } from '@/tokens'
@@ -10,6 +11,7 @@ type Props = {
   badgeLabel?: string
   productTypes?: string
   variant?: 'light' | 'dark'
+  imageUrl?: string
 }
 
 export default function CollectionCard({
@@ -20,6 +22,7 @@ export default function CollectionCard({
   badgeLabel,
   productTypes,
   variant = 'light',
+  imageUrl,
 }: Props) {
   const dark = variant === 'dark'
 
@@ -28,6 +31,15 @@ export default function CollectionCard({
       <div
         className={`aspect-[4/5] mb-5 relative overflow-hidden ${dark ? 'img-placeholder-dark' : 'img-placeholder'}`}
       >
+        {imageUrl && (
+          <Image
+            src={imageUrl}
+            alt={name}
+            fill
+            sizes="(min-width: 1024px) 33vw, 100vw"
+            className="object-cover"
+          />
+        )}
         <Badge status={status} label={badgeLabel} className="absolute top-4 left-4" />
         <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
       </div>
