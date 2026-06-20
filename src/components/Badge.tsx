@@ -9,6 +9,7 @@ type Props = {
 const statusLabels: Record<CollectionStatus, string> = {
   current: 'Current',
   returning: 'Returning',
+  'coming-soon': 'Coming Soon',
   archived: 'Archived',
 }
 

@@ -17,6 +17,7 @@ export const theme = {
     badges: {
       current: { bg: '#2D3B2A', text: '#F5F2ED' },
       returning: { bg: '#A0732A', text: '#F5F2ED' },
+      'coming-soon': { bg: '#3D5A6B', text: '#F5F2ED' },
       archived: { bg: '#5A5550', text: '#F5F2ED' },
     },
   },
@@ -26,7 +27,7 @@ export const theme = {
   },
 } as const
 
-export type CollectionStatus = 'current' | 'returning' | 'archived'
+export type CollectionStatus = 'current' | 'returning' | 'coming-soon' | 'archived'
 
 export interface Product {
   slug: string
