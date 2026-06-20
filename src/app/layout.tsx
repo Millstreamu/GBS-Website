@@ -1,22 +1,29 @@
 import type { Metadata } from 'next'
-import { Space_Grotesk } from 'next/font/google'
+import { JetBrains_Mono, Courier_Prime } from 'next/font/google'
 import { CartProvider } from '@/lib/cart-context'
 import './globals.css'
 
-// Space Grotesk is a squarish, geometric grotesque sans — closest Google
-// Fonts match to the Asimov font referenced by the client, without the
-// licensing/self-hosting overhead of a non-Google font file.
-const headingFont = Space_Grotesk({
+// JetBrains Mono — squarish monospace, closer to Asimov's geometric feel
+// than Space Grotesk, used for headings and body copy site-wide.
+const headingFont = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['500', '600', '700'],
   variable: '--font-serif',
   display: 'swap',
 })
 
-const bodyFont = Space_Grotesk({
+const bodyFont = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['300', '400', '500'],
   variable: '--font-sans',
+  display: 'swap',
+})
+
+// Courier Prime — used specifically for product names, per request.
+const productFont = Courier_Prime({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-product',
   display: 'swap',
 })
 
@@ -31,7 +38,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${headingFont.variable} ${bodyFont.variable}`}>
+    <html lang="en" className={`${headingFont.variable} ${bodyFont.variable} ${productFont.variable}`}>
       <body className="font-sans antialiased">
         <CartProvider>{children}</CartProvider>
       </body>

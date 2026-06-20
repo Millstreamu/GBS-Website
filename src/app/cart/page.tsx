@@ -70,7 +70,7 @@ export default function CartPage() {
                   <div className="flex-1">
                     <Link
                       href={`/collections/${item.collectionSlug}/${item.categorySlug}/${item.slug}`}
-                      className="font-serif text-lg hover:opacity-60 transition-opacity"
+                      className="font-product text-lg hover:opacity-60 transition-opacity"
                       style={{ color: 'var(--fg)' }}
                     >
                       {item.name}

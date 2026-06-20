@@ -21,7 +21,7 @@ export default function ProductCard({ product, collectionSlug, categorySlug }: P
         {product.tag}
       </p>
       <div className="flex items-baseline justify-between mb-2 gap-3">
-        <p className="font-serif text-lg" style={{ color: 'var(--fg)' }}>
+        <p className="font-product text-lg" style={{ color: 'var(--fg)' }}>
           {product.name}
         </p>
         <p className="text-sm flex-shrink-0" style={{ color: 'var(--muted)' }}>

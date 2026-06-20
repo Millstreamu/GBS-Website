@@ -53,7 +53,7 @@ export default function ProductDetail({ product, collectionName, collectionSlug,
         </span>
 
         <div className="flex items-baseline justify-between gap-6 mb-4">
-          <h1 className="font-serif text-5xl leading-tight" style={{ color: 'var(--fg)' }}>
+          <h1 className="font-product text-5xl leading-tight" style={{ color: 'var(--fg)' }}>
             {product.name}
           </h1>
           <p className="font-sans text-2xl font-medium whitespace-nowrap" style={{ color: 'var(--fg)' }}>
