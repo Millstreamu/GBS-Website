@@ -29,7 +29,7 @@ export default async function HomePage() {
           </h1>
           <p className="text-base leading-relaxed mb-10 max-w-md" style={{ color: 'var(--muted)' }}>
             Good Boy Supply is organised into distinct collections that evolve over time.
-            Explore what's current, what's returning, and what's gone to the archive.
+            Explore what&apos;s current, what&apos;s returning, and what&apos;s gone to the archive.
           </p>
           <Link
             href="#collections"
@@ -68,11 +68,11 @@ export default async function HomePage() {
       </section>
 
       {/* Collections at a glance */}
-      <section className="py-12" style={{ backgroundColor: ‘var(--bg)’ }}>
+      <section className="py-12" style={{ backgroundColor: 'var(--bg)' }}>
         <div className="max-w-6xl mx-auto px-8">
           <p
             className="text-xs tracking-widest uppercase mb-6"
-            style={{ color: ‘var(--muted)’ }}
+            style={{ color: 'var(--muted)' }}
           >
             Collections at a glance
           </p>
@@ -85,10 +85,10 @@ export default async function HomePage() {
                     <path d="M4 11.5L9 16.5L18 6" stroke="var(--fg)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 ),
-                title: ‘Current’,
-                description: `${currentCount} collection${currentCount === 1 ? ‘’ : ‘s’} available to shop now.`,
-                cta: ‘Browse Current →’,
-                href: ‘/collections’,
+                title: 'Current',
+                description: `${currentCount} collection${currentCount === 1 ? '' : 's'} available to shop now.`,
+                cta: 'Browse Current →',
+                href: '/collections',
               },
               {
                 icon: (
@@ -96,10 +96,10 @@ export default async function HomePage() {
                     <path d="M11 2L13.09 8.26L19.78 8.27L14.34 12.14L16.43 18.4L11 14.54L5.57 18.4L7.66 12.14L2.22 8.27L8.91 8.26L11 2Z" stroke="var(--fg)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 ),
-                title: ‘Coming Soon’,
-                description: `${comingSoonCount} new collection${comingSoonCount === 1 ? ‘’ : ‘s’} on the way.`,
-                cta: ‘See What\’s New →’,
-                href: ‘/collections’,
+                title: 'Coming Soon',
+                description: `${comingSoonCount} new collection${comingSoonCount === 1 ? '' : 's'} on the way.`,
+                cta: "See What's New →",
+                href: '/collections',
               },
               {
                 icon: (
@@ -108,10 +108,10 @@ export default async function HomePage() {
                     <path d="M11 6.5V11L14.2 13" stroke="var(--fg)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 ),
-                title: ‘Returning Soon’,
-                description: `${returningCount} collection${returningCount === 1 ? ‘’ : ‘s’} in the works and may be back.`,
-                cta: ‘See What\’s Coming →’,
-                href: ‘/collections’,
+                title: 'Returning Soon',
+                description: `${returningCount} collection${returningCount === 1 ? '' : 's'} in the works and may be back.`,
+                cta: "See What's Coming →",
+                href: '/collections',
               },
               {
                 icon: (
@@ -119,26 +119,26 @@ export default async function HomePage() {
                     <path d="M3 7L11 3.5L19 7M3 7L11 10.5M3 7V16L11 19.5M19 7L11 10.5M19 7V16L11 19.5M11 10.5V19.5" stroke="var(--fg)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 ),
-                title: ‘Archive’,
-                description: `${archivedCount} past collection${archivedCount === 1 ? ‘’ : ‘s’} that may return in the future.`,
-                cta: ‘Explore Archive →’,
-                href: ‘/archive’,
+                title: 'Archive',
+                description: `${archivedCount} past collection${archivedCount === 1 ? '' : 's'} that may return in the future.`,
+                cta: 'Explore Archive →',
+                href: '/archive',
               },
             ].map(({ icon, title, description, cta, href }) => (
               <Link
                 key={title}
                 href={href}
                 className="block p-6 border rounded-sm hover:opacity-85 transition-opacity"
-                style={{ borderColor: ‘var(--border)’, backgroundColor: ‘var(--surface)’ }}
+                style={{ borderColor: 'var(--border)', backgroundColor: 'var(--surface)' }}
               >
                 <div className="mb-4">{icon}</div>
-                <p className="font-serif text-xl mb-1.5" style={{ color: ‘var(--fg)’ }}>{title}</p>
-                <p className="text-sm leading-relaxed mb-4" style={{ color: ‘var(--muted)’ }}>
+                <p className="font-serif text-xl mb-1.5" style={{ color: 'var(--fg)' }}>{title}</p>
+                <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--muted)' }}>
                   {description}
                 </p>
                 <span
                   className="text-xs tracking-widest uppercase"
-                  style={{ color: ‘var(--fg)’ }}
+                  style={{ color: 'var(--fg)' }}
                 >
                   {cta}
                 </span>
