@@ -13,9 +13,8 @@ export default async function HomePage() {
   ])
 
   const currentCount = collections.filter(c => c.status === 'current').length
-  const returningCount = collections.filter(
-    c => c.status === 'returning' || c.status === 'coming-soon'
-  ).length
+  const comingSoonCount = collections.filter(c => c.status === 'coming-soon').length
+  const returningCount = collections.filter(c => c.status === 'returning').length
   const archivedCount = archivedCollections.length
 
   return (
@@ -23,7 +22,7 @@ export default async function HomePage() {
       <Nav />
 
       {/* Hero */}
-      <section className="max-w-6xl mx-auto px-8 pt-20 pb-16 grid grid-cols-2 gap-16 items-center">
+      <section className="max-w-6xl mx-auto px-8 pt-10 pb-8 grid grid-cols-2 gap-16 items-center">
         <div>
           <h1 className="font-serif text-6xl leading-tight mb-6" style={{ color: 'var(--fg)' }}>
             Browse by collection
@@ -33,7 +32,7 @@ export default async function HomePage() {
             Explore what's current, what's returning, and what's gone to the archive.
           </p>
           <Link
-            href="/collections"
+            href="#collections"
             className="inline-block text-xs tracking-widest uppercase px-6 py-3 hover:opacity-85 transition-opacity"
             style={{ backgroundColor: 'var(--accent)', color: 'var(--accent-text)' }}
           >
@@ -45,7 +44,7 @@ export default async function HomePage() {
       </section>
 
       {/* Dark collection carousel */}
-      <section className="py-20" style={{ backgroundColor: 'var(--dark)' }}>
+      <section id="collections" className="py-20" style={{ backgroundColor: 'var(--dark)' }}>
         <div className="max-w-6xl mx-auto px-8">
           <p
             className="text-xs tracking-widest uppercase mb-10"
@@ -69,66 +68,77 @@ export default async function HomePage() {
       </section>
 
       {/* Collections at a glance */}
-      <section className="py-20" style={{ backgroundColor: 'var(--bg)' }}>
+      <section className="py-12" style={{ backgroundColor: ‘var(--bg)’ }}>
         <div className="max-w-6xl mx-auto px-8">
           <p
-            className="text-xs tracking-widest uppercase mb-10"
-            style={{ color: 'var(--muted)' }}
+            className="text-xs tracking-widest uppercase mb-6"
+            style={{ color: ‘var(--muted)’ }}
           >
             Collections at a glance
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               {
                 icon: (
-                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                  <svg width="20" height="20" viewBox="0 0 22 22" fill="none">
                     <path d="M4 11.5L9 16.5L18 6" stroke="var(--fg)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 ),
-                title: 'Current',
-                description: `${currentCount} collection${currentCount === 1 ? '' : 's'} available to shop now.`,
-                cta: 'Browse Current →',
-                href: '/collections',
+                title: ‘Current’,
+                description: `${currentCount} collection${currentCount === 1 ? ‘’ : ‘s’} available to shop now.`,
+                cta: ‘Browse Current →’,
+                href: ‘/collections’,
               },
               {
                 icon: (
-                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                  <svg width="20" height="20" viewBox="0 0 22 22" fill="none">
+                    <path d="M11 2L13.09 8.26L19.78 8.27L14.34 12.14L16.43 18.4L11 14.54L5.57 18.4L7.66 12.14L2.22 8.27L8.91 8.26L11 2Z" stroke="var(--fg)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                ),
+                title: ‘Coming Soon’,
+                description: `${comingSoonCount} new collection${comingSoonCount === 1 ? ‘’ : ‘s’} on the way.`,
+                cta: ‘See What\’s New →’,
+                href: ‘/collections’,
+              },
+              {
+                icon: (
+                  <svg width="20" height="20" viewBox="0 0 22 22" fill="none">
                     <circle cx="11" cy="11" r="8.5" stroke="var(--fg)" strokeWidth="2" />
                     <path d="M11 6.5V11L14.2 13" stroke="var(--fg)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 ),
-                title: 'Returning Soon',
-                description: `${returningCount} collection${returningCount === 1 ? '' : 's'} in the works and may be back.`,
-                cta: 'See What’s Coming →',
-                href: '/collections',
+                title: ‘Returning Soon’,
+                description: `${returningCount} collection${returningCount === 1 ? ‘’ : ‘s’} in the works and may be back.`,
+                cta: ‘See What\’s Coming →’,
+                href: ‘/collections’,
               },
               {
                 icon: (
-                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                  <svg width="20" height="20" viewBox="0 0 22 22" fill="none">
                     <path d="M3 7L11 3.5L19 7M3 7L11 10.5M3 7V16L11 19.5M19 7L11 10.5M19 7V16L11 19.5M11 10.5V19.5" stroke="var(--fg)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 ),
-                title: 'Archive',
-                description: `${archivedCount} past collection${archivedCount === 1 ? '' : 's'} that may return in the future.`,
-                cta: 'Explore Archive →',
-                href: '/archive',
+                title: ‘Archive’,
+                description: `${archivedCount} past collection${archivedCount === 1 ? ‘’ : ‘s’} that may return in the future.`,
+                cta: ‘Explore Archive →’,
+                href: ‘/archive’,
               },
             ].map(({ icon, title, description, cta, href }) => (
               <Link
                 key={title}
                 href={href}
-                className="block p-8 border rounded-sm hover:opacity-85 transition-opacity"
-                style={{ borderColor: 'var(--border)', backgroundColor: 'var(--surface)' }}
+                className="block p-6 border rounded-sm hover:opacity-85 transition-opacity"
+                style={{ borderColor: ‘var(--border)’, backgroundColor: ‘var(--surface)’ }}
               >
-                <div className="mb-5">{icon}</div>
-                <p className="font-serif text-2xl mb-2" style={{ color: 'var(--fg)' }}>{title}</p>
-                <p className="text-sm leading-relaxed mb-5" style={{ color: 'var(--muted)' }}>
+                <div className="mb-4">{icon}</div>
+                <p className="font-serif text-xl mb-1.5" style={{ color: ‘var(--fg)’ }}>{title}</p>
+                <p className="text-sm leading-relaxed mb-4" style={{ color: ‘var(--muted)’ }}>
                   {description}
                 </p>
                 <span
                   className="text-xs tracking-widest uppercase"
-                  style={{ color: 'var(--fg)' }}
+                  style={{ color: ‘var(--fg)’ }}
                 >
                   {cta}
                 </span>

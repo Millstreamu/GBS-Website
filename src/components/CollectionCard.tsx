@@ -30,7 +30,10 @@ export default function CollectionCard({
   const exploreLabel = status === 'archived' ? 'Explore Archive →' : 'Explore Collection →'
 
   const inner = (
-    <div className="relative aspect-[3/4] w-full overflow-hidden rounded-sm img-placeholder-dark">
+    <div
+      className="relative aspect-[3/4] w-full overflow-hidden rounded-sm img-placeholder-dark"
+      style={{ border: '2px solid rgba(245,242,237,0.22)', boxShadow: 'inset 0 1px 0 rgba(245,242,237,0.08), 0 2px 8px rgba(0,0,0,0.35)' }}
+    >
       {imageUrl && (
         <Image
           src={imageUrl}
@@ -41,8 +44,8 @@ export default function CollectionCard({
         />
       )}
 
-      {/* Gradient for text legibility over the photo */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/5" />
+      {/* Gradient focused on text area at bottom */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/55 to-transparent" />
 
       <Badge status={status} label={badgeLabel} className="absolute top-4 left-4 z-10" />
 

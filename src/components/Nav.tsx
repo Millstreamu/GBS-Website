@@ -22,8 +22,8 @@ export default function Nav() {
 
       {/* Links */}
       <div className="flex items-center gap-8 text-sm" style={{ color: 'var(--muted)' }}>
-        <Link href="/collections" className="hover:opacity-60 transition-opacity">Collections</Link>
-        <Link href="/archive" className="hover:opacity-60 transition-opacity">Archive</Link>
+        <Link href="/#collections" className="hover:opacity-60 transition-opacity">Collections</Link>
+        <Link href="/archive" className="hover:opacity-60 transition-opacity">Shop All</Link>
         <Link href="/about" className="hover:opacity-60 transition-opacity">About</Link>
         <Link href="/contact" className="hover:opacity-60 transition-opacity">Contact</Link>
         <Link href="/cart" className="hover:opacity-60 transition-opacity">Cart ({itemCount})</Link>
@@ -35,7 +35,7 @@ export default function Nav() {
         className="text-xs tracking-widest uppercase px-5 py-2.5 rounded-full hover:opacity-80 transition-opacity"
         style={{ backgroundColor: 'var(--fg)', color: '#FFFFFF' }}
       >
-        Shop Collections
+        Shop All
       </Link>
     </nav>
   )
